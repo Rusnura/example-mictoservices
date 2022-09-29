@@ -1,0 +1,54 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.4'
+	id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+	id 'java'
+  id 'application'
+  id 'fi.evident.beanstalk' version '0.2.3'
+}
+
+group = 'ru.tumasoff.micro'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+applicationDefaultJvmArgs = ["-Djdk.tls.client.protocols=TLSv1.2"]
+
+configurations {
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
+
+  developmentOnly
+
+  runtimeClasspath {
+    extendsFrom developmentOnly
+  }
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation 'io.micrometer:micrometer-registry-prometheus'
+
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+  implementation 'org.zalando:problem-spring-web:0.27.0'
+
+  compileOnly 'org.apache.commons:commons-lang3:3.12.0'
+
+  compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
