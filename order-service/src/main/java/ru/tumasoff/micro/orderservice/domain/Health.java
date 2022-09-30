@@ -11,4 +11,8 @@ import lombok.ToString;
 @ToString
 public class Health {
   private HealthStatus status;
+
+  public Health(HealthStatus status) {
+    this.status = status;
+  }
 }
